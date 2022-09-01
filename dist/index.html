@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo app</title>
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <div class="content">
+
+
+        <div class="modal project-modal" data-link="3">
+            <div class="modal-content project-modal-content">
+              <form action="" class="project-form">
+                <label for="">Project Name</label>
+                <input type="text" id="project-name-input" maxlength="25" name="project-title" required>
+                <button type='button' class="project-submit-btn">Submit</button>
+              </form>
+            </div>
+          </div>
+
+          <div class="modal todo-modal">
+            <div class="modal-content todo-modal-content">
+              <form action="" class="todo-form">
+
+                <label for="">Todo title</label>
+                <input type="text" id="todo-title-input" maxlength="20" name="todo-title" required>
+
+                <label for="">Date</label>
+                <input type="date" id="todo-date" required>
+
+                <label for="">Priority</label>
+                <select name="" id="piority-selector">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <button type='button' class="todo-submit-btn">Submit</button>
+              </form>
+            </div>
+          </div>
+
+
+        <div class="side-bar">
+            <div class="title-container">
+                <h1 class="title">Todo List</h1>
+            </div>
+            <div class="project-container">
+                <div class="project-list">
+                    <ul class="project-list-items">
+                        <li>Gym <img id="p-delete-img" src="../src/images/delete-icon.svg" alt=""></li>
+                        <li>Work<img id="p-delete-img" src="../src/images/delete-icon.svg" alt=""></li>
+                        <li>Code<img id="p-delete-img" src="../src/images/delete-icon.svg" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="add-container">
+                <img src="../src/images/add-icon.svg" alt="" id="project-add-btn">
+            </div>
+        </div>
+
+        <div class="w">
+            <div class="todo-cards">
+                <div class="card">
+                    <p>Run</p>
+                    <div class="right">
+                        <p>Jun 8th</p>
+                        <img src="../src/images/delete-icon.svg" alt="" class="delete">
+                        <div class="edit-container">
+                            <img src="../src/images/edit-icon.svg" alt="" class="edit">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <p>Sleep</p>
+                    <div class="right">
+                        <p>Jun 8th</p>
+                        <img src="../src/images/delete-icon.svg" alt="" class="delete">
+                        <div class="edit-container">
+                            <img src="../src/images/edit-icon.svg" alt="" class="edit">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="add-task">
+                <button class="add-todo-btn">Add todo</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
