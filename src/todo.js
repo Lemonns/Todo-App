@@ -3,11 +3,7 @@ class Todo {
         this.title = title;
         this.date = date;
         this.priority = priority;
-        this.createTodo()
-    }
-
-    createTodo() {
-        //console.log("Test")
+        
     }
 }
 

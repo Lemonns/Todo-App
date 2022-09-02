@@ -1,7 +1,7 @@
 import {clearInputs, displayNone, renderProjectPage, renderTodoCards} from "./render-html"
 import {Todo} from "../todo.js"
 import { Project } from "../project"
-import {createProjectElement} from "./render-html"
+import {createProjectElement, renderProjectList} from "./render-html"
 
 let idIndex = 0;
 let projectArray = [];
@@ -37,25 +37,20 @@ projectSubmitBtn.addEventListener('click', () => {
     let projectNameInput = document.querySelector('#project-name-input');
     if (projectNameInput.value != "") {
 
-        let newTodo = new Todo(1, "w", "w", "w")
         let newProject = new Project(idIndex, projectNameInput.value)
 
         projectArray.push(newProject)
-        //projectArray[newProject.id].todos[0] = newTodo
-        //projectArray[newProject.id].todos[1] = newTodo
-        //renderProjectPage(newProject, newProject.id)
+
         createProjectElement(newProject.id, newProject.title, projectContainer, newProject)
         displayNone(projectModal)
         clearInputs(projectNameInput)
         
-        console.log(projectArray)
         idIndex++;
     }
 })
 
-//WE MIGHT HAVE TO ADD THIS EVENT LISTENER TO EVERY TIME AN ADD TODO BUTTON GETS RENDERED
+
 todoSubmitBtn.addEventListener('click', () => {
-//WE MIGHT HAVE TO ADD THIS EVENT LISTENER TO EVERY TIME AN ADD TODO BUTTON GETS RENDERED
     let prioritySelector = document.querySelector('#piority-selector')
     let todoTitle = document.querySelector('#todo-title-input')
     let todoDate = document.querySelector('#todo-date')
@@ -73,6 +68,36 @@ todoSubmitBtn.addEventListener('click', () => {
         clearInputs(todoTitle, todoDate)
         prioritySelector.selectedIndex = 0;
     }
-//WE MIGHT HAVE TO ADD THIS EVENT LISTENER TO EVERY TIME AN ADD TODO BUTTON GETS RENDERED
 })
 
+
+const TODO_WINDOW = document.querySelector(".w");
+
+//Delete todo
+TODO_WINDOW.addEventListener('click', (e) => {
+    let btn = e.target;
+    if (btn.hasAttribute('index-todo-delete-link')) { 
+        let currentProject = projectArray[parseInt(document.querySelector('.todo-cards').getAttribute('index-id'))];
+        let currentTodos = currentProject.todos;
+
+        currentTodos[parseInt(e.target.getAttribute('index-todo-delete-link'))] = null;
+        renderTodoCards(currentProject.todos, document.querySelector('.todo-cards'));
+    }
+    else {
+        console.log("No attribute")
+    }
+})
+
+
+const SIDE_BAR = document.querySelector('.side-bar');
+
+//Delete a project 
+SIDE_BAR.addEventListener('click', (e) => {
+    let btn = e.target
+    if (btn.hasAttribute('index-delete-link')) {
+        console.log("Has atr") //WORKING
+        projectArray[parseInt(e.target.getAttribute('index-delete-link'))] = null;
+        renderProjectList(projectArray, projectContainer)
+        console.log(projectArray)
+    }
+})
