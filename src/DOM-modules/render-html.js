@@ -3,13 +3,25 @@ import Edit from '../images/edit-icon.svg'
 
 
 //Creates a Todo card in html
-function createTodoDiv(id=0, title, date, container, todoArrId) {
+function createTodoDiv(id=0, title, date, container, todoArrId, priority) {
     const editDiv = document.createElement('div');
     editDiv.classList.add('edit-container');
     const rightDiv = document.createElement('div');
     rightDiv.classList.add('right')
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('card');
+
+    if (priority === "low") {
+        cardDiv.style.borderLeft = "solid 5px green"
+    }
+    else if (priority === "medium") {
+        cardDiv.style.borderLeft = "solid 5px orange"
+    }
+
+    else if (priority === "high") {
+        cardDiv.style.borderLeft = "solid 5px red"
+    }
+
 
     let titleP = document.createElement('p');
     titleP.textContent = title;
@@ -36,10 +48,9 @@ function createTodoDiv(id=0, title, date, container, todoArrId) {
     container.appendChild(cardDiv);
 }
 
-//use project-list-items for container --WE COULD ADD THIS FUNCTION INTO CREATE PROJECT ELEMENT
+
 function renderProjectList(projectArr, container) {
     container.textContent = ""
-    container.innerHTML = ""
     for (let i = 0; i < projectArr.length; i++) {
         if (projectArr[i] != null) {
             createProjectElement(projectArr[i].id, projectArr[i].title, container, projectArr[i])
@@ -49,7 +60,6 @@ function renderProjectList(projectArr, container) {
 
 
 
-//could possibly add an event listener every time an li is created here
 function createProjectElement(id, title, container, projectObj) {
     if (projectObj != null) {
         let deleteImg = Delete;
@@ -87,7 +97,7 @@ function displayNone() {
 
 function renderProjectPage(newProject, id=0) { 
     if (newProject != null) {
-        let primaryContainer = document.querySelector('.w')
+        
 
         let oldTodoList = document.querySelector('.todo-cards')
         oldTodoList.remove()
@@ -114,7 +124,7 @@ function renderTodoCards(TodoArray, container) {
     let indexer = 0
     for (let i = 0; i < TodoArray.length; i++) {
         if (TodoArray[i] != null) {
-            createTodoDiv(indexer, TodoArray[i].title, TodoArray[i].date, container, i)
+            createTodoDiv(indexer, TodoArray[i].title, TodoArray[i].date, container, i, TodoArray[i].priority)
             indexer++
         }
     }
@@ -124,7 +134,6 @@ function renderTodoCards(TodoArray, container) {
 
 function ProjectAddEvent(project, projectObj) {
     project.addEventListener('click', (e) => {
-        //console.log(e.target.getAttribute('index-project-link'))
         renderProjectPage(projectObj, projectObj.id)
     })
 }
